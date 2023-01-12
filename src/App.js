@@ -33,24 +33,28 @@ export default class App extends Component {
 
   // rendering content conditionaly
 
-  togglePersonHandler = () =>{
+  togglePersonHandler = () => {
     const doesshow = this.state.showPersons;
     this.setState({
       showPersons: !doesshow
     })
   }
   render() {
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+          <Person change={this.nameChangedhandler} click={() => this.setperson('its that yoou')} name={this.state.persons[1].name} age={this.state.persons[1].age} />
+          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        </div>
+      )
+    }
     return (
       <div className='App'>
         <h1>Hello This is React Application</h1>
         <button onClick={this.togglePersonHandler}>Toggle People</button>
-        {this.state.showPersons === true ?
-          <div>
-            <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-            <Person change={this.nameChangedhandler} click={() => this.setperson('its that yoou')} name={this.state.persons[1].name} age={this.state.persons[1].age} />
-            <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-          </div> : null
-        } 
+        {persons}
       </div>
     )
   }

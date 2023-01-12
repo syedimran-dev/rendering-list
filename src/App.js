@@ -11,16 +11,7 @@ export default class App extends Component {
     ],
     showPersons: false
   }
-  setperson = (newName) => {
-    this.setState({
-      persons: [
-        { name: newName, age: "25" },
-        { name: "Muhammad Imran", age: "20" },
-        { name: "Muhammad Faiza", age: "19" }
-      ]
-    })
-  }
-
+  
   nameChangedhandler = (event) => {
     this.setState({
       persons: [
@@ -29,6 +20,14 @@ export default class App extends Component {
         { name: "Muhammad Faiza", age: "19" }
       ]
     })
+  }
+
+  // delete persons
+
+  deletePersonhandler = (personIndex) => {
+      const person = this.state.persons;
+      person.splice(personIndex, 1);
+      this.setState({persons:person});
   }
 
   // rendering content conditionaly
@@ -40,12 +39,12 @@ export default class App extends Component {
     })
   }
   render() {
-    let persons = null;
-    if (this.state.showPersons) {
-      persons = (
+    let personss = null;
+    if (this.state.showPersons === false) {
+      personss = (
         <div>
-          {this.state.persons.map(person =>{
-            return  <Person name={person.name} age={person.age} />
+          {this.state.persons.map((person, index) =>{
+            return  <Person click={()=>this.deletePersonhandler(index)} name={person.name} age={person.age} />
           })}
         </div>
       )
@@ -54,7 +53,7 @@ export default class App extends Component {
       <div className='App'>
         <h1>Hello This is React Application</h1>
         <button onClick={this.togglePersonHandler}>Toggle People</button>
-        {persons}
+        {personss}
       </div>
     )
   }

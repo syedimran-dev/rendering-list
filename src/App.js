@@ -31,6 +31,8 @@ export default class App extends Component {
     })
   }
 
+  // rendering content conditionaly
+
   togglePersonHandler = () =>{
     const doesshow = this.state.showPersons;
     this.setState({

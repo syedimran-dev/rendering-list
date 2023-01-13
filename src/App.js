@@ -25,7 +25,8 @@ export default class App extends Component {
   // delete persons
 
   deletePersonhandler = (personIndex) => {
-      const person = this.state.persons;
+      // const person = this.state.persons;
+      const person = [...this.state.persons];
       person.splice(personIndex, 1);
       this.setState({persons:person});
   }

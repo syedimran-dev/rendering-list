@@ -5,13 +5,13 @@ import Person from './component/person'
 export default class App extends Component {
   state = {
     persons: [
-      { name: "Sultan Ali", age: "24" },
-      { name: "Muhammad Imran", age: "19" },
-      { name: "Muhammad Faizan", age: "18" }
+      {id: 'name1',  name: "Sultan Ali", age: "24" },
+      {id: 'name2',  name: "Muhammad Imran", age: "19" },
+      {id: 'name3',  name: "Muhammad Faizan", age: "18" }
     ],
     showPersons: false
   }
-  
+
   nameChangedhandler = (event) => {
     this.setState({
       persons: [
@@ -25,10 +25,10 @@ export default class App extends Component {
   // delete persons
 
   deletePersonhandler = (personIndex) => {
-      // const person = this.state.persons;
-      const person = [...this.state.persons];
-      person.splice(personIndex, 1);
-      this.setState({persons:person});
+    // const person = this.state.persons;
+    const person = [...this.state.persons];
+    person.splice(personIndex, 1);
+    this.setState({ persons: person });
   }
 
   // rendering content conditionaly
@@ -44,8 +44,8 @@ export default class App extends Component {
     if (this.state.showPersons === false) {
       personss = (
         <div>
-          {this.state.persons.map((person, index) =>{
-            return  <Person click={()=>this.deletePersonhandler(index)} name={person.name} age={person.age} />
+          {this.state.persons.map((person, index) => {
+            return <Person click={() => this.deletePersonhandler(index)} key={person.id} name={person.name} age={person.age} />
           })}
         </div>
       )
